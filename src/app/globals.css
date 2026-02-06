@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-brand-dark-green: #45595a;
+  --color-brand-green: #67ad59;
+  --color-brand-blue: #1d3259;
+  --color-brand-green-light: #67ad5915;
+  --color-brand-green-hover: #5a9c4d;
+  --color-bg: #f7f8f8;
+  --color-card: #ffffff;
+  --font-sans: var(--font-geist-sans);
+}
+
+body {
+  background: var(--color-bg);
+  color: #1a1a1a;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-enter {
+  animation: fadeSlideIn 0.35s ease-out;
+}
