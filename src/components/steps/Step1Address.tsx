@@ -36,7 +36,6 @@ export default function Step1Address({
 
   const handleNext = () => {
     if (validate()) {
-      // Normalize postcode before advancing
       const normalized = formData.postcode.replace(/\s/g, "").toUpperCase();
       updateField("postcode", normalized);
       onNext();
@@ -45,8 +44,15 @@ export default function Step1Address({
 
   return (
     <StepWrapper stepKey={1} onBack={onBack}>
-      <div className="space-y-5">
-        <h2 className="text-xl font-bold text-brand-blue">Uw adres</h2>
+      <div className="space-y-6">
+        <div className="space-y-1.5">
+          <h2 className="text-xl font-bold text-brand-blue tracking-tight">
+            Uw adres
+          </h2>
+          <p className="text-sm text-gray-400">
+            Wij gebruiken dit om uw woning te controleren
+          </p>
+        </div>
 
         <TextInput
           label="Postcode"

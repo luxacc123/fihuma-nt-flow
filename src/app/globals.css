@@ -1,16 +1,27 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* ── Brand palette ── */
   --color-brand-dark-green: #45595a;
   --color-brand-green: #67ad59;
   --color-brand-blue: #1d3259;
-  --color-brand-green-light: #67ad5915;
+  --color-brand-green-light: #67ad5910;
   --color-brand-green-hover: #5a9c4d;
-  --color-bg: #f7f8f8;
+  --color-brand-green-glow: #67ad5920;
+  --color-brand-blue-light: #1d325908;
+
+  /* ── Surface / background ── */
+  --color-bg: #f5f6f8;
   --color-card: #ffffff;
+  --color-card-hover: #fafbfc;
+  --color-border: #e8eaed;
+  --color-border-hover: #d1d5db;
+
+  /* ── Typography ── */
   --font-sans: var(--font-geist-sans);
 }
 
+/* ── Global base ── */
 body {
   background: var(--color-bg);
   color: #1a1a1a;
@@ -19,10 +30,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ── Step entrance animation ── */
 @keyframes fadeSlideIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -31,5 +43,27 @@ body {
 }
 
 .step-enter {
-  animation: fadeSlideIn 0.35s ease-out;
+  animation: fadeSlideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Subtle pulse for success icons ── */
+@keyframes subtlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+.pulse-soft {
+  animation: subtlePulse 2.5s ease-in-out infinite;
+}
+
+/* ── Shimmer effect for premium result card ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-border {
+  background: linear-gradient(90deg, transparent, var(--color-brand-green-glow), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
 }

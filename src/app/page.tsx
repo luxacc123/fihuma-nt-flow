@@ -96,8 +96,8 @@ export default function Home() {
   const showProgress = step >= 1 && step <= 7;
 
   return (
-    <main className="min-h-screen flex flex-col items-center px-4 py-6 sm:py-10">
-      <div className="w-full max-w-md">
+    <main className="min-h-screen flex flex-col items-center px-5 py-6 sm:py-12">
+      <div className="w-full max-w-[520px]">
         {showProgress && (
           <ProgressBar current={step} total={TOTAL_QUESTION_STEPS} />
         )}

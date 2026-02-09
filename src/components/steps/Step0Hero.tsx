@@ -8,10 +8,10 @@ interface Step0Props {
 export default function Step0Hero({ onNext }: Step0Props) {
   return (
     <StepWrapper stepKey={0}>
-      <div className="text-center space-y-6 py-4">
+      <div className="text-center space-y-8 py-4">
         {/* Shield / trust icon */}
         <div className="flex justify-center">
-          <div className="w-16 h-16 rounded-full bg-brand-green-light flex items-center justify-center">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-green-light to-brand-green-glow flex items-center justify-center pulse-soft">
             <svg
               className="w-8 h-8 text-brand-green"
               fill="none"
@@ -28,21 +28,42 @@ export default function Step0Hero({ onNext }: Step0Props) {
           </div>
         </div>
 
-        <div className="space-y-3">
-          <h1 className="text-2xl font-bold text-brand-blue leading-tight">
+        <div className="space-y-3.5">
+          <h1 className="text-[22px] sm:text-2xl font-bold text-brand-blue leading-tight tracking-tight">
             Ontdek of uw woning in aanmerking komt voor isolatie met subsidie
           </h1>
-          <p className="text-gray-500 text-base leading-relaxed">
+          <p className="text-gray-400 text-[15px] leading-relaxed max-w-sm mx-auto">
             Beantwoord een paar korte vragen en ontvang direct een indicatie.
             Wij begeleiden u vervolgens in het hele traject.
           </p>
         </div>
 
-        <Button onClick={onNext}>Start de check</Button>
+        <div className="space-y-4 pt-1">
+          <Button onClick={onNext}>Start de check</Button>
 
-        <p className="text-xs text-gray-400 tracking-wide">
-          Vrijblijvend &bull; Kosteloos inzicht &bull; Geen verplichtingen
-        </p>
+          <div className="flex items-center justify-center gap-3 text-xs text-gray-400">
+            <span className="flex items-center gap-1.5">
+              <svg className="w-3.5 h-3.5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              Vrijblijvend
+            </span>
+            <span className="w-px h-3 bg-gray-200" />
+            <span className="flex items-center gap-1.5">
+              <svg className="w-3.5 h-3.5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              Kosteloos
+            </span>
+            <span className="w-px h-3 bg-gray-200" />
+            <span className="flex items-center gap-1.5">
+              <svg className="w-3.5 h-3.5 text-brand-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              Geen verplichtingen
+            </span>
+          </div>
+        </div>
       </div>
     </StepWrapper>
   );

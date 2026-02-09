@@ -70,14 +70,19 @@ export default function Step8Contact({
 
   return (
     <StepWrapper stepKey={10} onBack={onBack}>
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <div className="text-gray-600 text-base leading-relaxed">
-            <p>Wilt u isoleren met subsidie?</p>
+      <div className="space-y-7">
+        <div className="space-y-3">
+          <div className="inline-flex items-center gap-2 text-xs font-medium text-brand-green bg-brand-green-light rounded-full px-3 py-1.5">
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Bijna klaar
+          </div>
+          <div className="text-gray-400 text-[15px] leading-relaxed">
             <p>Wij bekijken de mogelijkheden vrijblijvend met u</p>
             <p>en begeleiden u in het hele traject.</p>
           </div>
-          <p className="text-brand-blue font-semibold text-base pt-2">
+          <p className="text-brand-blue font-semibold text-base pt-1">
             Laat ons contact met u opnemen:
           </p>
         </div>
@@ -133,7 +138,10 @@ export default function Step8Contact({
         </div>
 
         {submitError && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-sm text-red-600">
+          <div className="bg-red-50 border border-red-100 rounded-2xl p-4 text-[13px] text-red-600 flex items-start gap-2.5">
+            <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            </svg>
             {submitError}
           </div>
         )}

@@ -27,18 +27,18 @@ export default function Step6Intent({
 }: StepProps) {
   return (
     <StepWrapper stepKey={9} onBack={onBack}>
-      <div className="space-y-6">
-        <div className="space-y-1">
-          <h2 className="text-xl font-bold text-brand-blue">
+      <div className="space-y-7">
+        <div className="space-y-1.5">
+          <h2 className="text-xl font-bold text-brand-blue tracking-tight">
             Voorbereiding op de inspectie
           </h2>
           <p className="text-sm text-gray-400">
-            Optioneel — u kunt ook direct verder gaan
+            Optioneel &mdash; u kunt ook direct verder gaan
           </p>
         </div>
 
         <div className="space-y-4">
-          <p className="text-base font-medium text-gray-700">
+          <p className="text-[15px] font-medium text-gray-600">
             Dacht u al aan isolatie?
           </p>
           <SingleSelect
@@ -49,7 +49,7 @@ export default function Step6Intent({
         </div>
 
         <div className="space-y-4">
-          <p className="text-base font-medium text-gray-700">
+          <p className="text-[15px] font-medium text-gray-600">
             Zijn er aandachtspunten in huis?
           </p>
           <MultiSelect

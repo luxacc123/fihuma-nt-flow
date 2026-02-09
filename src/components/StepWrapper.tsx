@@ -11,15 +11,15 @@ export default function StepWrapper({
 }: StepWrapperProps) {
   return (
     <div key={stepKey} className="step-enter">
-      <div className="bg-white rounded-2xl shadow-sm p-6 sm:p-8 mt-4">
+      <div className="bg-card rounded-3xl shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.04)] p-7 sm:p-9 mt-5 border border-border/60">
         {onBack && (
           <button
             type="button"
             onClick={onBack}
-            className="text-sm text-gray-400 hover:text-brand-dark-green transition-colors mb-4 flex items-center gap-1 cursor-pointer"
+            className="text-sm text-gray-400 hover:text-brand-dark-green transition-colors duration-200 mb-5 flex items-center gap-1.5 cursor-pointer group"
           >
             <svg
-              className="w-4 h-4"
+              className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

@@ -18,15 +18,15 @@ export default function Button({
   className = "",
 }: ButtonProps) {
   const base =
-    "w-full rounded-2xl font-semibold text-lg transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 min-h-[52px] px-6 py-4 disabled:opacity-50 disabled:cursor-not-allowed";
+    "w-full rounded-2xl font-semibold text-base transition-all duration-200 cursor-pointer flex items-center justify-center gap-2.5 min-h-[52px] px-6 py-4 disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-green";
 
   const variants = {
     primary:
-      "bg-brand-green text-white hover:bg-brand-green-hover active:scale-[0.98] shadow-sm",
+      "bg-brand-green text-white hover:bg-brand-green-hover active:scale-[0.98] shadow-[0_2px_8px_rgba(103,173,89,0.25)] hover:shadow-[0_4px_16px_rgba(103,173,89,0.3)]",
     secondary:
-      "bg-white border-2 border-brand-dark-green text-brand-dark-green hover:bg-gray-50 active:scale-[0.98]",
+      "bg-white border border-border text-brand-dark-green hover:bg-card-hover hover:border-border-hover active:scale-[0.98] shadow-[0_1px_2px_rgba(0,0,0,0.04)]",
     ghost:
-      "bg-transparent text-brand-dark-green hover:text-brand-blue underline underline-offset-2 min-h-0 py-2",
+      "bg-transparent text-gray-500 hover:text-brand-dark-green min-h-0 py-2.5 text-sm font-medium",
   };
 
   return (
