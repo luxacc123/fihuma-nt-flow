@@ -16,30 +16,31 @@ async function lookupPdok(
   try {
     const pc = postcode.replace(/\s/g, "").toUpperCase();
     const query = encodeURIComponent(`${pc} ${houseNumber}`);
-    const url = `https://geodata.nationaalgeoregister.nl/locatieserver/v3/free?q=${query}&rows=1`;
+    const url = `https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q=${query}&rows=1`;
 
     const res = await fetch(url, { signal: AbortSignal.timeout(4000) });
     if (!res.ok) {
-      console.warn(`[PDOK] HTTP ${res.status} for ${pc} ${houseNumber}`);
+      console.warn(`[PDOK] fail pc=${pc} nr=${houseNumber} err=HTTP ${res.status}`);
       return result;
     }
 
     const data = await res.json();
     const docs: Array<Record<string, string>> = data?.response?.docs ?? [];
 
-    console.log(
-      `[PDOK] postcode=${pc} huisnummer=${houseNumber} docs=${docs.length}` +
-        (docs.length > 0 ? ` best=${docs[0].weergavenaam}` : "")
-    );
-
-    if (docs.length === 0) return result;
+    if (docs.length === 0) {
+      console.warn(`[PDOK] fail pc=${pc} nr=${houseNumber} err=no docs returned`);
+      return result;
+    }
 
     const doc = docs[0];
     result.city = doc.woonplaatsnaam ?? null;
     result.municipality = doc.gemeentenaam ?? null;
     result.street = doc.straatnaam ?? null;
+
+    console.log(`[PDOK] ok pc=${pc} nr=${houseNumber} city=${result.city} municipality=${result.municipality}`);
   } catch (err) {
-    console.warn("[PDOK] Lookup failed (lead will still be saved):", err);
+    const pc = postcode.replace(/\s/g, "").toUpperCase();
+    console.warn(`[PDOK] fail pc=${pc} nr=${houseNumber} err=${err instanceof Error ? err.message : err}`);
   }
 
   return result;
