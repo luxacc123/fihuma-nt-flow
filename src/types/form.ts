@@ -10,21 +10,27 @@ export interface LeadFormData {
   // Step 3: WOZ band
   woz_band: string; // "UNDER_477" | "OVER_477" | "DONT_KNOW"
 
-  // Step 4: Poor parts (multi-select, stored as array in state)
+  // Step 4: Housing situation
+  housing_situation: string; // "KOOP" | "HUUR"
+
+  // Step 5: Dwelling type
+  dwelling_type_user: string; // "RIJTJES" | "HOEK" | "VRIJSTAAND"
+
+  // Step 6: Poor parts (multi-select, stored as array in state)
   poor_parts: string[];
 
-  // Step 5: Already insulated (multi-select, stored as array in state)
+  // Step 7: Already insulated (multi-select, stored as array in state)
   already_insulated_parts: string[];
 
-  // Step 6: Intent
+  // Step 9 (post-activation): Intent
   considering_insulation: string; // "YES" | "NO" | "MAYBE"
-  pain_points: string;
+  pain_points: string[];
   paste_text: string;
 
-  // Step 7: Result sets preferred contact
+  // Step 8: Result sets preferred contact
   preferred_contact: string; // "PHONE" | "EMAIL"
 
-  // Step 8: Contact details
+  // Step 10: Contact details
   contact_name: string;
   phone: string;
   email: string;
@@ -49,10 +55,12 @@ export const INITIAL_FORM_DATA: LeadFormData = {
   house_number_addition: "",
   energy_label_choice: "",
   woz_band: "",
+  housing_situation: "",
+  dwelling_type_user: "",
   poor_parts: [],
   already_insulated_parts: [],
   considering_insulation: "",
-  pain_points: "",
+  pain_points: [],
   paste_text: "",
   preferred_contact: "PHONE",
   contact_name: "",
@@ -66,7 +74,7 @@ export const INITIAL_FORM_DATA: LeadFormData = {
   utm_term: "",
   utm_content: "",
   campaign_code: "fihuma_nt",
-  landing_version: "v1",
+  landing_version: "v2",
 };
 
 export interface StepProps {

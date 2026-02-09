@@ -30,17 +30,18 @@ export default function Step0Hero({ onNext }: Step0Props) {
 
         <div className="space-y-3">
           <h1 className="text-2xl font-bold text-brand-blue leading-tight">
-            Check in 1 minuut of uw woning mogelijk in aanmerking komt
+            Ontdek of uw woning in aanmerking komt voor isolatie met subsidie
           </h1>
-          <p className="text-gray-500 text-base">
-            Beantwoord een paar korte vragen. Daarna ziet u direct de uitkomst.
+          <p className="text-gray-500 text-base leading-relaxed">
+            Beantwoord een paar korte vragen en ontvang direct een indicatie.
+            Wij begeleiden u vervolgens in het hele traject.
           </p>
         </div>
 
         <Button onClick={onNext}>Start de check</Button>
 
         <p className="text-xs text-gray-400 tracking-wide">
-          Kosteloos &bull; Geen verplichtingen
+          Vrijblijvend &bull; Kosteloos inzicht &bull; Geen verplichtingen
         </p>
       </div>
     </StepWrapper>

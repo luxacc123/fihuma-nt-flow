@@ -2,7 +2,7 @@ import StepWrapper from "@/components/StepWrapper";
 
 export default function Step9ThankYou() {
   return (
-    <StepWrapper stepKey={9}>
+    <StepWrapper stepKey={11}>
       <div className="text-center space-y-6 py-4">
         {/* Success icon */}
         <div className="flex justify-center">
@@ -25,10 +25,12 @@ export default function Step9ThankYou() {
 
         <div className="space-y-3">
           <h2 className="text-xl font-bold text-brand-blue">
-            Bedankt &mdash; wij nemen contact met u op
+            Aanvraag ontvangen
           </h2>
-          <p className="text-gray-600 text-base">
-            Een adviseur belt u om een vrijblijvende inspectie in te plannen
+          <p className="text-gray-600 text-base leading-relaxed">
+            Bedankt &mdash; wij nemen contact met u op om een vrijblijvende
+            inspectie in te plannen. Samen bekijken we welke
+            isolatiemogelijkheden en subsidies voor uw woning beschikbaar zijn.
           </p>
         </div>
 

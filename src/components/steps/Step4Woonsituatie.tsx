@@ -3,18 +3,15 @@
 import { useState } from "react";
 import type { StepProps } from "@/types/form";
 import StepWrapper from "@/components/StepWrapper";
-import MultiSelect from "@/components/ui/MultiSelect";
+import SingleSelect from "@/components/ui/SingleSelect";
 import Button from "@/components/ui/Button";
 
 const OPTIONS = [
-  { value: "vloer", label: "Vloer / kruipruimte" },
-  { value: "spouw", label: "Gevel / spouwmuur" },
-  { value: "dak", label: "Dak / zolder" },
-  { value: "ramen", label: "Ramen / kozijnen" },
-  { value: "onbekend", label: "Weet ik niet" },
+  { value: "KOOP", label: "Koopwoning" },
+  { value: "HUUR", label: "Huurwoning" },
 ];
 
-export default function Step4PoorParts({
+export default function Step4Woonsituatie({
   formData,
   updateField,
   onNext,
@@ -23,8 +20,8 @@ export default function Step4PoorParts({
   const [error, setError] = useState("");
 
   const handleNext = () => {
-    if (formData.poor_parts.length === 0) {
-      setError("Selecteer minimaal één optie");
+    if (!formData.housing_situation) {
+      setError("Maak een keuze om verder te gaan");
       return;
     }
     setError("");
@@ -32,17 +29,17 @@ export default function Step4PoorParts({
   };
 
   return (
-    <StepWrapper stepKey={6} onBack={onBack}>
+    <StepWrapper stepKey={4} onBack={onBack}>
       <div className="space-y-5">
         <h2 className="text-xl font-bold text-brand-blue">
-          Welke onderdelen zijn (mogelijk) slecht ge&iuml;soleerd?
+          Wat is uw woonsituatie?
         </h2>
 
-        <MultiSelect
+        <SingleSelect
           options={OPTIONS}
-          selected={formData.poor_parts}
+          selected={formData.housing_situation}
           onChange={(v) => {
-            updateField("poor_parts", v);
+            updateField("housing_situation", v);
             setError("");
           }}
         />

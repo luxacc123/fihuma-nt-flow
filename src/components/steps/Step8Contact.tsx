@@ -69,7 +69,7 @@ export default function Step8Contact({
   const isEmailPreferred = formData.preferred_contact === "EMAIL";
 
   return (
-    <StepWrapper stepKey={8} onBack={onBack}>
+    <StepWrapper stepKey={10} onBack={onBack}>
       <div className="space-y-6">
         <div className="space-y-2">
           <div className="text-gray-600 text-base leading-relaxed">

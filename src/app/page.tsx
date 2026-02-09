@@ -7,14 +7,17 @@ import Step0Hero from "@/components/steps/Step0Hero";
 import Step1Address from "@/components/steps/Step1Address";
 import Step2EnergyLabel from "@/components/steps/Step2EnergyLabel";
 import Step3WozBand from "@/components/steps/Step3WozBand";
-import Step4PoorParts from "@/components/steps/Step4PoorParts";
-import Step5AlreadyInsulated from "@/components/steps/Step5AlreadyInsulated";
-import Step6Intent from "@/components/steps/Step6Intent";
-import Step7Result from "@/components/steps/Step7Result";
-import Step8Contact from "@/components/steps/Step8Contact";
-import Step9ThankYou from "@/components/steps/Step9ThankYou";
+import Step4Woonsituatie from "@/components/steps/Step4Woonsituatie";
+import Step5Woningtype from "@/components/steps/Step5Woningtype";
+import Step6PoorParts from "@/components/steps/Step4PoorParts";
+import Step7AlreadyInsulated from "@/components/steps/Step5AlreadyInsulated";
+import Step8Result from "@/components/steps/Step7Result";
+import Step9Intent from "@/components/steps/Step6Intent";
+import Step10Contact from "@/components/steps/Step8Contact";
+import Step11ThankYou from "@/components/steps/Step9ThankYou";
 
-const TOTAL_QUESTION_STEPS = 6; // Steps 1-6 show progress
+// Steps 1-7 are question steps that show a progress bar
+const TOTAL_QUESTION_STEPS = 7;
 
 export default function Home() {
   const [step, setStep] = useState(0);
@@ -69,7 +72,7 @@ export default function Home() {
         );
       }
 
-      setStep(9);
+      setStep(11); // Thank you
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       setSubmitError(
@@ -89,7 +92,8 @@ export default function Home() {
     onBack: goBack,
   };
 
-  const showProgress = step >= 1 && step <= 6;
+  // Progress bar for question steps 1-7
+  const showProgress = step >= 1 && step <= 7;
 
   return (
     <main className="min-h-screen flex flex-col items-center px-4 py-6 sm:py-10">
@@ -102,19 +106,21 @@ export default function Home() {
         {step === 1 && <Step1Address {...stepProps} />}
         {step === 2 && <Step2EnergyLabel {...stepProps} />}
         {step === 3 && <Step3WozBand {...stepProps} />}
-        {step === 4 && <Step4PoorParts {...stepProps} />}
-        {step === 5 && <Step5AlreadyInsulated {...stepProps} />}
-        {step === 6 && <Step6Intent {...stepProps} />}
-        {step === 7 && <Step7Result {...stepProps} />}
-        {step === 8 && (
-          <Step8Contact
+        {step === 4 && <Step4Woonsituatie {...stepProps} />}
+        {step === 5 && <Step5Woningtype {...stepProps} />}
+        {step === 6 && <Step6PoorParts {...stepProps} />}
+        {step === 7 && <Step7AlreadyInsulated {...stepProps} />}
+        {step === 8 && <Step8Result {...stepProps} />}
+        {step === 9 && <Step9Intent {...stepProps} />}
+        {step === 10 && (
+          <Step10Contact
             {...stepProps}
             isSubmitting={isSubmitting}
             submitError={submitError}
             onSubmit={handleSubmit}
           />
         )}
-        {step === 9 && <Step9ThankYou />}
+        {step === 11 && <Step11ThankYou />}
       </div>
     </main>
   );

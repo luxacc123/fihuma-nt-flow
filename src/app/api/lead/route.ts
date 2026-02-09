@@ -207,6 +207,8 @@ export async function POST(request: NextRequest) {
       usage_goal: bag.usage_goal,
       energy_label_choice: body.energy_label_choice || null,
       woz_band: body.woz_band || null,
+      housing_situation: body.housing_situation || null,
+      dwelling_type_user: body.dwelling_type_user || null,
       poor_parts: Array.isArray(body.poor_parts)
         ? body.poor_parts.join(";")
         : body.poor_parts || null,
@@ -214,7 +216,9 @@ export async function POST(request: NextRequest) {
         ? body.already_insulated_parts.join(";")
         : body.already_insulated_parts || null,
       considering_insulation: body.considering_insulation || null,
-      pain_points: body.pain_points || null,
+      pain_points: Array.isArray(body.pain_points)
+        ? body.pain_points.join(";")
+        : body.pain_points || null,
       paste_text: body.paste_text || null,
       contact_name: body.contact_name,
       phone: body.phone,
@@ -227,7 +231,7 @@ export async function POST(request: NextRequest) {
       utm_campaign: body.utm_campaign || null,
       utm_term: body.utm_term || null,
       utm_content: body.utm_content || null,
-      landing_version: body.landing_version || "v1",
+      landing_version: body.landing_version || "v2",
     };
 
     const supabase = getSupabaseClient();

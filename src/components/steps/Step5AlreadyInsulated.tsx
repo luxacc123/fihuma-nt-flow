@@ -32,7 +32,7 @@ export default function Step5AlreadyInsulated({
   };
 
   return (
-    <StepWrapper stepKey={5} onBack={onBack}>
+    <StepWrapper stepKey={7} onBack={onBack}>
       <div className="space-y-5">
         <h2 className="text-xl font-bold text-brand-blue">
           Is er al iets ge&iuml;soleerd (voor zover u weet)?
