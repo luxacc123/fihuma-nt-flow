@@ -1,6 +1,50 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseClient } from "@/lib/supabase";
 
+interface PdokAddress {
+  city: string | null;
+  municipality: string | null;
+  street: string | null;
+}
+
+async function lookupPdok(
+  postcode: string,
+  houseNumber: number
+): Promise<PdokAddress> {
+  const result: PdokAddress = { city: null, municipality: null, street: null };
+
+  try {
+    const pc = postcode.replace(/\s/g, "").toUpperCase();
+    const query = encodeURIComponent(`${pc} ${houseNumber}`);
+    const url = `https://geodata.nationaalgeoregister.nl/locatieserver/v3/free?q=${query}&rows=1`;
+
+    const res = await fetch(url, { signal: AbortSignal.timeout(4000) });
+    if (!res.ok) {
+      console.warn(`[PDOK] HTTP ${res.status} for ${pc} ${houseNumber}`);
+      return result;
+    }
+
+    const data = await res.json();
+    const docs: Array<Record<string, string>> = data?.response?.docs ?? [];
+
+    console.log(
+      `[PDOK] postcode=${pc} huisnummer=${houseNumber} docs=${docs.length}` +
+        (docs.length > 0 ? ` best=${docs[0].weergavenaam}` : "")
+    );
+
+    if (docs.length === 0) return result;
+
+    const doc = docs[0];
+    result.city = doc.woonplaatsnaam ?? null;
+    result.municipality = doc.gemeentenaam ?? null;
+    result.street = doc.straatnaam ?? null;
+  } catch (err) {
+    console.warn("[PDOK] Lookup failed (lead will still be saved):", err);
+  }
+
+  return result;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -41,14 +85,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // PDOK address enrichment (best-effort, never blocks insert)
+    const pdok = await lookupPdok(body.postcode, houseNumber);
+
     // Explicit field mapping — never blind-insert the body
     const row = {
       campaign_code: body.campaign_code || "fihuma_nt",
       postcode: body.postcode,
       house_number: houseNumber,
       house_number_addition: body.house_number_addition || null,
-      city: body.city || null,
-      municipality: body.municipality || null,
+      city: pdok.city,
+      municipality: pdok.municipality,
       energy_label_choice: body.energy_label_choice || null,
       woz_band: body.woz_band || null,
       poor_parts: Array.isArray(body.poor_parts)
