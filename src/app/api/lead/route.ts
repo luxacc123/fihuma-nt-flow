@@ -1,22 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseClient } from "@/lib/supabase";
 
+// ---------------------------------------------------------------------------
+// PDOK Locatieserver — city, municipality, street + adresseerbaarobject_id
+// ---------------------------------------------------------------------------
+
 interface PdokAddress {
   city: string | null;
   municipality: string | null;
   street: string | null;
+  adresseerbaarobjectId: string | null;
 }
 
 async function lookupPdok(
   postcode: string,
   houseNumber: number
 ): Promise<PdokAddress> {
-  const result: PdokAddress = { city: null, municipality: null, street: null };
+  const result: PdokAddress = {
+    city: null,
+    municipality: null,
+    street: null,
+    adresseerbaarobjectId: null,
+  };
 
   try {
     const pc = postcode.replace(/\s/g, "").toUpperCase();
     const query = encodeURIComponent(`${pc} ${houseNumber}`);
-    const url = `https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q=${query}&rows=1`;
+    const url = `https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q=${query}&rows=1&fq=type:adres`;
 
     const res = await fetch(url, { signal: AbortSignal.timeout(4000) });
     if (!res.ok) {
@@ -36,8 +46,11 @@ async function lookupPdok(
     result.city = doc.woonplaatsnaam ?? null;
     result.municipality = doc.gemeentenaam ?? null;
     result.street = doc.straatnaam ?? null;
+    result.adresseerbaarobjectId = doc.adresseerbaarobject_id ?? null;
 
-    console.log(`[PDOK] ok pc=${pc} nr=${houseNumber} city=${result.city} municipality=${result.municipality}`);
+    console.log(
+      `[PDOK] ok pc=${pc} nr=${houseNumber} city=${result.city} municipality=${result.municipality} vbo_id=${result.adresseerbaarobjectId}`
+    );
   } catch (err) {
     const pc = postcode.replace(/\s/g, "").toUpperCase();
     console.warn(`[PDOK] fail pc=${pc} nr=${houseNumber} err=${err instanceof Error ? err.message : err}`);
@@ -45,6 +58,92 @@ async function lookupPdok(
 
   return result;
 }
+
+// ---------------------------------------------------------------------------
+// BAG OGC API v2 — verblijfsobject + pand details (public, no key needed)
+// ---------------------------------------------------------------------------
+
+const BAG_BASE = "https://api.pdok.nl/kadaster/bag/ogc/v2";
+
+interface BagData {
+  bag_verblijfsobject_id: string | null;
+  bag_pand_id: string | null;
+  build_year: number | null;
+  surface_m2: number | null;
+  usage_goal: string | null;
+}
+
+async function lookupBag(
+  adresseerbaarobjectId: string | null,
+  postcode: string,
+  houseNumber: number
+): Promise<BagData> {
+  const result: BagData = {
+    bag_verblijfsobject_id: null,
+    bag_pand_id: null,
+    build_year: null,
+    surface_m2: null,
+    usage_goal: null,
+  };
+  const pc = postcode.replace(/\s/g, "").toUpperCase();
+
+  if (!adresseerbaarobjectId) {
+    console.warn(`[BAG] skip pc=${pc} nr=${houseNumber} err=no adresseerbaarobject_id from PDOK`);
+    return result;
+  }
+
+  try {
+    // Step 1: verblijfsobject by identificatie
+    const vboUrl = `${BAG_BASE}/collections/verblijfsobject/items?f=json&limit=1&identificatie=${adresseerbaarobjectId}`;
+    const vboRes = await fetch(vboUrl, { signal: AbortSignal.timeout(4000) });
+
+    if (!vboRes.ok) {
+      console.warn(`[BAG] fail pc=${pc} nr=${houseNumber} err=vbo HTTP ${vboRes.status}`);
+      return result;
+    }
+
+    const vboData = await vboRes.json();
+    const vboFeatures = vboData?.features ?? [];
+
+    if (vboFeatures.length === 0) {
+      console.warn(`[BAG] fail pc=${pc} nr=${houseNumber} err=no verblijfsobject found for id=${adresseerbaarobjectId}`);
+      return result;
+    }
+
+    const vbo = vboFeatures[0].properties;
+    result.bag_verblijfsobject_id = vbo.identificatie ?? adresseerbaarobjectId;
+    result.surface_m2 = typeof vbo.oppervlakte === "number" ? vbo.oppervlakte : null;
+    result.usage_goal = vbo.gebruiksdoel ?? null;
+
+    // Step 2: pand via pand.href link
+    const pandHrefs: string[] = vbo["pand.href"] ?? [];
+    if (pandHrefs.length > 0) {
+      const pandUrl = `${pandHrefs[0]}?f=json`;
+      const pandRes = await fetch(pandUrl, { signal: AbortSignal.timeout(4000) });
+
+      if (pandRes.ok) {
+        const pandData = await pandRes.json();
+        const pand = pandData?.properties ?? pandData;
+        result.bag_pand_id = pand.identificatie ?? null;
+        result.build_year = typeof pand.bouwjaar === "number" ? pand.bouwjaar : null;
+      } else {
+        console.warn(`[BAG] fail pc=${pc} nr=${houseNumber} err=pand HTTP ${pandRes.status}`);
+      }
+    }
+
+    console.log(
+      `[BAG] ok pc=${pc} nr=${houseNumber} m2=${result.surface_m2} build_year=${result.build_year} usage=${result.usage_goal}`
+    );
+  } catch (err) {
+    console.warn(`[BAG] fail pc=${pc} nr=${houseNumber} err=${err instanceof Error ? err.message : err}`);
+  }
+
+  return result;
+}
+
+// ---------------------------------------------------------------------------
+// POST /api/lead
+// ---------------------------------------------------------------------------
 
 export async function POST(request: NextRequest) {
   try {
@@ -89,6 +188,9 @@ export async function POST(request: NextRequest) {
     // PDOK address enrichment (best-effort, never blocks insert)
     const pdok = await lookupPdok(body.postcode, houseNumber);
 
+    // BAG building enrichment (best-effort, uses adresseerbaarobject_id from PDOK)
+    const bag = await lookupBag(pdok.adresseerbaarobjectId, body.postcode, houseNumber);
+
     // Explicit field mapping — never blind-insert the body
     const row = {
       campaign_code: body.campaign_code || "fihuma_nt",
@@ -97,6 +199,12 @@ export async function POST(request: NextRequest) {
       house_number_addition: body.house_number_addition || null,
       city: pdok.city,
       municipality: pdok.municipality,
+      street: pdok.street,
+      bag_verblijfsobject_id: bag.bag_verblijfsobject_id,
+      bag_pand_id: bag.bag_pand_id,
+      build_year: bag.build_year,
+      surface_m2: bag.surface_m2,
+      usage_goal: bag.usage_goal,
       energy_label_choice: body.energy_label_choice || null,
       woz_band: body.woz_band || null,
       poor_parts: Array.isArray(body.poor_parts)
