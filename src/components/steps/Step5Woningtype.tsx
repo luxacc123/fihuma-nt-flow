@@ -81,7 +81,7 @@ export default function Step5Woningtype({
   };
 
   return (
-    <StepWrapper stepKey={5} onBack={onBack}>
+    <StepWrapper stepKey={4} onBack={onBack}>
       <div className="space-y-6">
         <h2 className="text-xl font-bold text-brand-blue tracking-tight">
           Wat voor type woning heeft u?

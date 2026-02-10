@@ -2,7 +2,7 @@ import StepWrapper from "@/components/StepWrapper";
 
 export default function Step9ThankYou() {
   return (
-    <StepWrapper stepKey={10}>
+    <StepWrapper stepKey={9}>
       <div className="space-y-8 py-3">
         {/* Success icon — left-aligned */}
         <div className="relative w-fit">

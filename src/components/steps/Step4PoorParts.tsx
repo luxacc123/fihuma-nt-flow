@@ -84,7 +84,7 @@ export default function Step4PoorParts({
   };
 
   return (
-    <StepWrapper stepKey={6} onBack={onBack}>
+    <StepWrapper stepKey={5} onBack={onBack}>
       <div className="space-y-6">
         <div className="space-y-1.5">
           <h2 className="text-xl font-bold text-brand-blue tracking-tight">

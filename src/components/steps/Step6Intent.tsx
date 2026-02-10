@@ -19,7 +19,7 @@ export default function Step6Intent({
   onBack,
 }: StepProps) {
   return (
-    <StepWrapper stepKey={8} onBack={onBack}>
+    <StepWrapper stepKey={7} onBack={onBack}>
       <div className="space-y-7">
         <div className="space-y-1.5">
           <h2 className="text-xl font-bold text-brand-blue tracking-tight">

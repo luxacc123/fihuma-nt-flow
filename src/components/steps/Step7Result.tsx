@@ -12,7 +12,7 @@ export default function Step7Result({
   };
 
   return (
-    <StepWrapper stepKey={7}>
+    <StepWrapper stepKey={6}>
       <div className="space-y-7 py-3">
         {/* Green checkmark — left-aligned */}
         <div className="relative w-fit">
