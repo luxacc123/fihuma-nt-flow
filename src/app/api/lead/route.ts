@@ -226,11 +226,11 @@ export async function POST(request: NextRequest) {
       preferred_contact: body.preferred_contact || "PHONE",
       consent_contact: body.consent_contact,
       consent_privacy: body.consent_privacy,
-      utm_source: body.utm_source || null,
-      utm_medium: body.utm_medium || null,
-      utm_campaign: body.utm_campaign || null,
+      utm_source: body.utm_source || "direct",
+      utm_medium: body.utm_medium || "none",
+      utm_campaign: body.utm_campaign || "unknown",
       utm_term: body.utm_term || null,
-      utm_content: body.utm_content || null,
+      utm_content: body.utm_content || "na",
       landing_version: body.landing_version || "v2",
     };
 
