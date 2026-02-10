@@ -29,10 +29,7 @@ export default function Step9ThankYou() {
             Aanvraag ontvangen
           </h2>
           <p className="text-gray-400 text-[15px] leading-relaxed">
-            Bedankt &mdash; wij nemen contact met u op om een inspectie in te plannen.
-          </p>
-          <p className="text-gray-400 text-[15px] leading-relaxed">
-            Samen bekijken we welke isolatie en subsidies voor uw woning mogelijk zijn.
+            Bedankt &mdash; wij nemen doorgaans op werkdagen binnen 24 uur contact met u op om de afspraak in te plannen.
           </p>
         </div>
 

@@ -37,10 +37,6 @@ export default function Step0Hero({ onNext }: Step0Props) {
           </p>
         </div>
 
-        <p className="text-gray-300 text-[13px] leading-relaxed max-w-xs mx-auto text-balance">
-          Beantwoord een paar korte vragen en zie direct of uw woning mogelijk past binnen de voorwaarden.
-        </p>
-
         <Button onClick={onNext}>Start de check</Button>
       </div>
     </StepWrapper>
