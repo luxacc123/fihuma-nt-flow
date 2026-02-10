@@ -17,7 +17,7 @@ export default function Step7Result({
   };
 
   return (
-    <StepWrapper stepKey={8}>
+    <StepWrapper stepKey={7}>
       <div className="text-center space-y-7 py-3">
         {/* Animated green checkmark */}
         <div className="flex justify-center">
@@ -47,12 +47,12 @@ export default function Step7Result({
             Uw woning lijkt binnen de voorwaarden te vallen.
           </h2>
           <p className="text-gray-400 text-[15px] leading-relaxed">
-            Plan vrijblijvend een korte inspectie, dan ziet u precies wat er mogelijk is.
+            Plan een korte inspectie en ontdek wat er mogelijk is.
           </p>
         </div>
 
         <div className="space-y-3">
-          <Button onClick={handlePhone}>Plan vrijblijvende inspectie</Button>
+          <Button onClick={handlePhone}>Plan inspectie</Button>
           <Button variant="ghost" onClick={handleEmail}>
             Liever contact per e-mail
           </Button>

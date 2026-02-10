@@ -69,7 +69,7 @@ export default function Step8Contact({
   const isEmailPreferred = formData.preferred_contact === "EMAIL";
 
   return (
-    <StepWrapper stepKey={10} onBack={onBack}>
+    <StepWrapper stepKey={9} onBack={onBack}>
       <div className="space-y-7">
         <div className="space-y-3">
           <div className="inline-flex items-center gap-2 text-xs font-medium text-brand-green bg-brand-green-light rounded-full px-3 py-1.5">

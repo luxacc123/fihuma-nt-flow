@@ -2,7 +2,7 @@ import StepWrapper from "@/components/StepWrapper";
 
 export default function Step9ThankYou() {
   return (
-    <StepWrapper stepKey={11}>
+    <StepWrapper stepKey={10}>
       <div className="text-center space-y-8 py-4">
         {/* Success icon */}
         <div className="flex justify-center">

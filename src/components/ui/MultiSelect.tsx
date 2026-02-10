@@ -1,6 +1,7 @@
 interface Option {
   value: string;
   label: string;
+  icon?: React.ReactNode;
 }
 
 interface MultiSelectProps {
@@ -49,7 +50,18 @@ export default function MultiSelect({
                 : "border-border bg-white text-gray-600 hover:border-border-hover hover:bg-card-hover"
             }`}
           >
-            <span>{option.label}</span>
+            <div className="flex items-center gap-3">
+              {option.icon && (
+                <div
+                  className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-200 ${
+                    isSelected ? "bg-brand-green/10" : "bg-gray-50"
+                  }`}
+                >
+                  {option.icon}
+                </div>
+              )}
+              <span>{option.label}</span>
+            </div>
             <div
               className={`w-5 h-5 rounded-md border-2 shrink-0 ml-3 flex items-center justify-center transition-all duration-200 ${
                 isSelected
