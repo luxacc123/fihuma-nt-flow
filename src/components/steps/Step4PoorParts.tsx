@@ -9,7 +9,7 @@ import Button from "@/components/ui/Button";
 const OPTIONS = [
   {
     value: "vloer",
-    label: "Vloer / kruipruimte",
+    label: "Vloer (kruipruimte)",
     icon: (
       /* Layers icon — stacked horizontal planes */
       <svg className="w-5 h-5 text-brand-dark-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -34,10 +34,9 @@ const OPTIONS = [
     value: "dak",
     label: "Dak / zolder",
     icon: (
-      /* Home/roof icon — triangle roof with house body */
+      /* Triangle/roof icon — reads as "roof" at a glance */
       <svg className="w-5 h-5 text-brand-dark-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-        <polyline strokeLinecap="round" strokeLinejoin="round" points="9 22 9 12 15 12 15 22" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="m2 20 10-16 10 16H2Z" />
       </svg>
     ),
   },
