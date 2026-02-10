@@ -17,11 +17,11 @@ export default function StepWrapper({
         {/* Fihuma logo — top-right, decorative */}
         <div className="absolute top-5 right-5 sm:top-7 sm:right-7 pointer-events-none">
           <Image
-            src="/fihuma-logo.svg"
+            src="/fihuma-logo.png"
             alt=""
             width={80}
-            height={20}
-            className="h-5 w-auto opacity-40"
+            height={60}
+            className="h-7 w-auto"
             priority
           />
         </div>
