@@ -129,7 +129,21 @@ export default function Step8Contact({
             error={errors.consent_contact}
           />
           <Checkbox
-            label="Ik ga akkoord met de privacyverklaring."
+            label={
+              <>
+                Ik ga akkoord met de{" "}
+                <a
+                  href="/privacy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-brand-green hover:text-brand-green-hover"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  privacyverklaring
+                </a>
+                .
+              </>
+            }
             checked={formData.consent_privacy}
             onChange={(v) => updateField("consent_privacy", v)}
             error={errors.consent_privacy}
