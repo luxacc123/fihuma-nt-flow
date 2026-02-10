@@ -39,8 +39,10 @@ export default function PrivacyPage() {
                 Delen wij uw gegevens?
               </h2>
               <p>
-                Nee. Wij verkopen of verstrekken uw gegevens niet aan derden.
-                Uw informatie blijft bij Fihuma.
+                Nee. Wij verkopen uw gegevens niet. Uw gegevens worden alleen
+                gebruikt door Fihuma en haar uitvoeringspartners (zoals
+                KlantCentraal) om contact met u op te nemen over isolatie,
+                subsidie en het plannen van een inspectie.
               </p>
 
               <h2 className="text-base font-semibold text-brand-blue pt-2">
