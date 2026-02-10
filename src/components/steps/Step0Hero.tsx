@@ -30,10 +30,10 @@ export default function Step0Hero({ onNext }: Step0Props) {
 
         <div className="space-y-3.5">
           <h1 className="text-[22px] sm:text-2xl font-bold text-brand-blue leading-tight tracking-tight">
-            Check in 30 seconden of u mogelijk in aanmerking komt voor isolatie-subsidie.
+            Check of u mogelijk in aanmerking komt voor isolatie-subsidie.
           </h1>
           <p className="text-gray-400 text-[15px] leading-relaxed max-w-sm mx-auto">
-            Beantwoord een paar korte vragen en ontvang direct een indicatie.
+            Beantwoord een paar korte vragen &mdash; klaar in &plusmn;30 seconden
           </p>
         </div>
 

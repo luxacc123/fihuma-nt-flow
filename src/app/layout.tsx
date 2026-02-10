@@ -16,7 +16,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Isolatiecheck - Gratis subsidie check",
   description:
-    "Ontdek in 1 minuut of uw woning in aanmerking komt voor isolatie met subsidie. Vrijblijvend en kosteloos.",
+    "Ontdek in ±30 seconden of uw woning in aanmerking komt voor isolatie met subsidie. Vrijblijvend en kosteloos.",
 };
 
 export default function RootLayout({

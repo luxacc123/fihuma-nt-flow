@@ -39,7 +39,7 @@ export default function Step7Result({
             Uw woning lijkt binnen de voorwaarden te vallen.
           </h2>
           <p className="text-gray-400 text-[15px] leading-relaxed">
-            Plan een korte inspectie en ontdek wat er mogelijk is met subsidie.
+            Plan een inspectie en ontdek wat er mogelijk is met subsidie.
           </p>
         </div>
 
