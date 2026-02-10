@@ -65,10 +65,10 @@ export default function PrivacyPage() {
               <p>
                 Heeft u vragen? Bel ons op{" "}
                 <a
-                  href="tel:0883038200"
+                  href="tel:+31853016509"
                   className="text-brand-green hover:text-brand-green-hover font-medium"
                 >
-                  088-303 82 00
+                  085 301 65 09
                 </a>
                 .
               </p>
