@@ -34,9 +34,10 @@ const OPTIONS = [
     value: "dak",
     label: "Dak / zolder",
     icon: (
-      /* Triangle/roof icon — reads as "roof" at a glance */
+      /* Roof icon — pitched roof with chimney */
       <svg className="w-5 h-5 text-brand-dark-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="m2 20 10-16 10 16H2Z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 18h18L12 6 3 18Z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17 10V7h-2v1" />
       </svg>
     ),
   },

@@ -3,41 +3,39 @@ import StepWrapper from "@/components/StepWrapper";
 export default function Step9ThankYou() {
   return (
     <StepWrapper stepKey={10}>
-      <div className="text-center space-y-8 py-4">
-        {/* Success icon */}
-        <div className="flex justify-center">
-          <div className="relative">
-            <div className="w-18 h-18 rounded-2xl bg-gradient-to-br from-brand-green-light to-brand-green-glow flex items-center justify-center pulse-soft">
-              <svg
-                className="w-9 h-9 text-brand-green"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-            <div className="absolute -inset-2 rounded-3xl bg-brand-green/5 -z-10" />
+      <div className="space-y-7 py-3">
+        {/* Success icon — left-aligned */}
+        <div className="relative w-fit">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-green-light to-brand-green-glow flex items-center justify-center pulse-soft">
+            <svg
+              className="w-7 h-7 text-brand-green"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
           </div>
+          <div className="absolute -inset-2 rounded-3xl bg-brand-green/5 -z-10" />
         </div>
 
-        <div className="space-y-3.5">
+        <div className="space-y-2.5">
           <h2 className="text-xl font-bold text-brand-blue tracking-tight">
             Aanvraag ontvangen
           </h2>
-          <p className="text-gray-400 text-[15px] leading-relaxed max-w-sm mx-auto">
+          <p className="text-gray-400 text-[15px] leading-relaxed">
             Bedankt &mdash; wij nemen contact met u op om een vrijblijvende
             inspectie in te plannen. Samen bekijken we welke
             isolatiemogelijkheden en subsidies voor uw woning beschikbaar zijn.
           </p>
         </div>
 
-        <div className="pt-2">
+        <div className="mt-2">
           <div className="bg-gray-50 rounded-2xl border border-border/60 p-5">
             <p className="text-sm text-gray-400">
               U kunt ons ook direct bereiken op

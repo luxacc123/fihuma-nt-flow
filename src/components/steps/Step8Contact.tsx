@@ -70,24 +70,23 @@ export default function Step8Contact({
 
   return (
     <StepWrapper stepKey={9} onBack={onBack}>
-      <div className="space-y-7">
-        <div className="space-y-3">
+      <div className="space-y-8">
+        <div className="space-y-2.5">
           <div className="inline-flex items-center gap-2 text-xs font-medium text-brand-green bg-brand-green-light rounded-full px-3 py-1.5">
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             Bijna klaar
           </div>
-          <div className="text-gray-400 text-[15px] leading-relaxed">
-            <p>Wij bekijken de mogelijkheden vrijblijvend met u</p>
-            <p>en begeleiden u in het hele traject.</p>
-          </div>
+          <p className="text-gray-400 text-[15px] leading-relaxed">
+            Wij bekijken de mogelijkheden vrijblijvend met u en begeleiden u in het hele traject.
+          </p>
           <p className="text-brand-blue font-semibold text-base pt-1">
             Laat ons contact met u opnemen:
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
           <TextInput
             label="Naam"
             value={formData.contact_name}
@@ -122,7 +121,7 @@ export default function Step8Contact({
           />
         </div>
 
-        <div className="space-y-3 pt-1">
+        <div className="space-y-3">
           <Checkbox
             label="Ik geef toestemming om contact met mij op te nemen."
             checked={formData.consent_contact}
@@ -147,9 +146,7 @@ export default function Step8Contact({
         )}
 
         <Button onClick={handleSubmit} loading={isSubmitting}>
-          {isEmailPreferred
-            ? "Verstuur & neem contact op per e-mail"
-            : "Verstuur & laat mij terugbellen"}
+          Plan inspectie
         </Button>
       </div>
     </StepWrapper>
