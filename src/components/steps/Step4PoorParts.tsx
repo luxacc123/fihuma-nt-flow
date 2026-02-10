@@ -11,8 +11,11 @@ const OPTIONS = [
     value: "vloer",
     label: "Vloer / kruipruimte",
     icon: (
+      /* Layers icon — stacked horizontal planes */
       <svg className="w-5 h-5 text-brand-dark-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5M3.75 21V6.75L12 3l8.25 3.75V21M6 21v-3.75h4.5V21M13.5 21v-3.75H18V21" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="m12 2 10 6.5v7L12 22 2 15.5v-7L12 2Z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2 15.5 12 9l10 6.5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="m2 8.5 10 6.5 10-6.5" />
       </svg>
     ),
   },
@@ -20,8 +23,10 @@ const OPTIONS = [
     value: "spouw",
     label: "Gevel / spouwmuur",
     icon: (
+      /* BrickWall icon — rows of offset bricks */
       <svg className="w-5 h-5 text-brand-dark-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 6.75v10.5M3.75 17.25h16.5M3.75 6.75v10.5M20.25 6.75v10.5" />
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M3 9h18M3 15h18M9 3v6M15 9v6M9 15v6" />
       </svg>
     ),
   },
@@ -29,8 +34,10 @@ const OPTIONS = [
     value: "dak",
     label: "Dak / zolder",
     icon: (
+      /* Home/roof icon — triangle roof with house body */
       <svg className="w-5 h-5 text-brand-dark-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21L12 3l9.75 18M5.25 21h13.5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline strokeLinecap="round" strokeLinejoin="round" points="9 22 9 12 15 12 15 22" />
       </svg>
     ),
   },
@@ -38,8 +45,10 @@ const OPTIONS = [
     value: "ramen",
     label: "Ramen / kozijnen",
     icon: (
+      /* Window icon — four-pane window */
       <svg className="w-5 h-5 text-brand-dark-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 4.5h18v15H3zM12 4.5v15M3 12h18" />
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="M12 4v16M2 12h20" />
       </svg>
     ),
   },
@@ -47,8 +56,11 @@ const OPTIONS = [
     value: "onbekend",
     label: "Weet ik niet",
     icon: (
+      /* HelpCircle icon */
       <svg className="w-5 h-5 text-brand-dark-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M12 18.75h.008v.008H12v-.008z" />
+        <circle cx="12" cy="12" r="10" />
+        <path strokeLinecap="round" d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+        <path strokeLinecap="round" d="M12 17h.01" />
       </svg>
     ),
   },
@@ -79,7 +91,7 @@ export default function Step4PoorParts({
             Welke onderdelen zijn (mogelijk) slecht ge&iuml;soleerd?
           </h2>
           <p className="text-sm text-gray-400">
-            Meerdere opties mogelijk
+            Meerdere opties mogelijk — kies alles wat mogelijk van toepassing is
           </p>
         </div>
 
