@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface StepWrapperProps {
   children: React.ReactNode;
   onBack?: () => void;
@@ -11,7 +13,19 @@ export default function StepWrapper({
 }: StepWrapperProps) {
   return (
     <div key={stepKey} className="step-enter">
-      <div className="bg-card rounded-3xl shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.04)] p-7 sm:p-9 mt-5 border border-border/60">
+      <div className="relative bg-card rounded-3xl shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.04)] p-7 sm:p-9 mt-5 border border-border/60">
+        {/* Fihuma logo — top-right, decorative */}
+        <div className="absolute top-5 right-5 sm:top-7 sm:right-7 pointer-events-none">
+          <Image
+            src="/fihuma-logo.svg"
+            alt=""
+            width={80}
+            height={20}
+            className="h-5 w-auto opacity-40"
+            priority
+          />
+        </div>
+
         {onBack && (
           <button
             type="button"

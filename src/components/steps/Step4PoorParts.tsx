@@ -9,7 +9,7 @@ import Button from "@/components/ui/Button";
 const OPTIONS = [
   {
     value: "vloer",
-    label: "Vloer (kruipruimte)",
+    label: "Vloer / bodem",
     icon: (
       /* Layers icon — stacked horizontal planes */
       <svg className="w-5 h-5 text-brand-dark-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
