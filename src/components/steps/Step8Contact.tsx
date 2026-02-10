@@ -79,7 +79,7 @@ export default function Step8Contact({
             Bijna klaar
           </div>
           <p className="text-gray-400 text-[15px] leading-relaxed">
-            Een adviseur neemt telefonisch contact met u op om uw situatie kort door te nemen en, als het past, een vrijblijvende inspectie in te plannen.
+            Na uw aanvraag bellen wij u kort om samen een inspectieafspraak in te plannen.
           </p>
           <p className="text-brand-blue font-semibold text-base pt-1">
             Laat ons contact met u opnemen:
