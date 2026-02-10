@@ -27,7 +27,7 @@ export default function TextInput({
   multiline = false,
   rows = 3,
 }: TextInputProps) {
-  const inputClasses = `w-full rounded-xl border px-4 py-3.5 text-[15px] outline-none transition-all duration-200 bg-white placeholder:text-gray-300 ${
+  const inputClasses = `w-full rounded-xl border px-4 py-3.5 text-base outline-none transition-all duration-200 bg-white placeholder:text-gray-300 ${
     error
       ? "border-red-300 focus:border-red-400 focus:ring-2 focus:ring-red-50"
       : "border-border focus:border-brand-green focus:ring-2 focus:ring-brand-green-light hover:border-border-hover"

@@ -6,34 +6,61 @@ import StepWrapper from "@/components/StepWrapper";
 import SingleSelect from "@/components/ui/SingleSelect";
 import Button from "@/components/ui/Button";
 
+{/* Rijtjeswoning: 3 connected houses, middle highlighted */}
+const IconRijtjes = (
+  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+    {/* Left house */}
+    <path d="M2 21v-8l3-3 3 3v8" />
+    <path d="M3.5 16h3" />
+    {/* Middle house (taller) */}
+    <path d="M8 21V9l4-4 4 4v12" />
+    <path d="M10 16h4" />
+    <path d="M10 19h4" />
+    {/* Right house */}
+    <path d="M16 21v-8l3-3 3 3v8" />
+    <path d="M17.5 16h3" />
+    {/* Ground line */}
+    <path d="M2 21h20" />
+  </svg>
+);
+
+{/* Hoekwoning: 2 houses forming an L-corner */}
+const IconHoek = (
+  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+    {/* Front house */}
+    <path d="M3 21V10l5-5 5 5v11" />
+    <path d="M5.5 15h5" />
+    <path d="M5.5 18h5" />
+    {/* Side wing (receding, shorter) */}
+    <path d="M13 21v-7l4-3v10" />
+    <path d="M14.5 16h2" />
+    {/* Corner accent */}
+    <path d="M13 14l4-3" />
+    {/* Ground line */}
+    <path d="M3 21h18" />
+  </svg>
+);
+
+{/* Vrijstaand: single detached house with space around it */}
+const IconVrijstaand = (
+  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+    {/* House body */}
+    <path d="M6 21V10l6-6 6 6v11" />
+    {/* Door */}
+    <path d="M10 21v-4h4v4" />
+    {/* Window */}
+    <path d="M9 14h6" />
+    {/* Chimney */}
+    <path d="M15 7V4h2v5" />
+    {/* Ground line with space */}
+    <path d="M2 21h20" />
+  </svg>
+);
+
 const OPTIONS = [
-  {
-    value: "RIJTJES",
-    label: "Rijtjeswoning",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5M3.75 3v18m4.5-18v18m4.5-18v18m4.5-18v18M5.25 3h13.5M5.25 21h13.5M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6.75H15m-1.5 3H15m-1.5 3H15" />
-      </svg>
-    ),
-  },
-  {
-    value: "HOEK",
-    label: "Hoekwoning",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-      </svg>
-    ),
-  },
-  {
-    value: "VRIJSTAAND",
-    label: "Vrijstaande woning",
-    icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
-      </svg>
-    ),
-  },
+  { value: "RIJTJES", label: "Rijtjeswoning", icon: IconRijtjes },
+  { value: "HOEK", label: "Hoekwoning", icon: IconHoek },
+  { value: "VRIJSTAAND", label: "Vrijstaande woning", icon: IconVrijstaand },
 ];
 
 export default function Step5Woningtype({
