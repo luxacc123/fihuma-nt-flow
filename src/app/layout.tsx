@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     "Beantwoord een paar korte vragen en ontvang direct een indicatie voor isolatiesubsidie.",
   icons: {
     icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
