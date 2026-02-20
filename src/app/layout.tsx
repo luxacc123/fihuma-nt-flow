@@ -18,6 +18,13 @@ export const metadata: Metadata = {
   title: "Isolatiecheck - Gratis subsidie check",
   description:
     "Beantwoord een paar korte vragen en ontvang direct een indicatie voor isolatiesubsidie.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
