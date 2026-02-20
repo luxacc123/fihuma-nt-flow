@@ -2,6 +2,23 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseClient } from "@/lib/supabase";
 
 // ---------------------------------------------------------------------------
+// Simple in-memory rate limiter — max 3 requests per IP per 10 minutes
+// ---------------------------------------------------------------------------
+
+const RATE_LIMIT = 3;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+
+const ipHits = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const hits = (ipHits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  hits.push(now);
+  ipHits.set(ip, hits);
+  return hits.length > RATE_LIMIT;
+}
+
+// ---------------------------------------------------------------------------
 // PDOK Locatieserver — city, municipality, street + adresseerbaarobject_id
 // ---------------------------------------------------------------------------
 
@@ -119,6 +136,15 @@ async function lookupBag(
 // ---------------------------------------------------------------------------
 
 export async function POST(request: NextRequest) {
+  // Rate limit by IP
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many requests" },
+      { status: 429 }
+    );
+  }
+
   try {
     const body = await request.json();
 
