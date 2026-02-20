@@ -86,6 +86,16 @@ export default function Step8Contact({
           </p>
         </div>
 
+        {/* Honeypot — hidden from real users */}
+        <div aria-hidden="true" className="absolute opacity-0 h-0 overflow-hidden pointer-events-none" tabIndex={-1}>
+          <TextInput
+            label="Website"
+            value={formData.website}
+            onChange={(v) => updateField("website", v)}
+            autoComplete="off"
+          />
+        </div>
+
         <div className="space-y-5">
           <TextInput
             label="Naam"

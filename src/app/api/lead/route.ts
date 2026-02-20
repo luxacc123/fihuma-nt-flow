@@ -122,6 +122,11 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
+    // Honeypot check — bots fill the hidden "website" field
+    if (body.website) {
+      return new NextResponse(null, { status: 204 });
+    }
+
     // Validate required fields
     const requiredFields = ["postcode", "house_number", "contact_name", "phone"];
     for (const field of requiredFields) {

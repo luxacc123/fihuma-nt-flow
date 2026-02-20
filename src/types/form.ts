@@ -44,6 +44,9 @@ export interface LeadFormData {
   utm_term: string;
   utm_content: string;
 
+  // Honeypot (anti-spam)
+  website: string;
+
   // Meta
   campaign_code: string;
   landing_version: string;
@@ -73,6 +76,7 @@ export const INITIAL_FORM_DATA: LeadFormData = {
   utm_campaign: "",
   utm_term: "",
   utm_content: "",
+  website: "",
   campaign_code: "fihuma_nt",
   landing_version: "v2",
 };
