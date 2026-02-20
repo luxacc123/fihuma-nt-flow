@@ -5,7 +5,7 @@ import { getSupabaseClient } from "@/lib/supabase";
 // Simple in-memory rate limiter — max 3 requests per IP per 10 minutes
 // ---------------------------------------------------------------------------
 
-const RATE_LIMIT = 3;
+const RATE_LIMIT = 10;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 
 const ipHits = new Map<string, number[]>();
