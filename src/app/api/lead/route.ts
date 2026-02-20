@@ -29,18 +29,12 @@ async function lookupPdok(
     const url = `https://api.pdok.nl/bzk/locatieserver/search/v3_1/free?q=${query}&rows=1&fq=type:adres`;
 
     const res = await fetch(url, { signal: AbortSignal.timeout(4000) });
-    if (!res.ok) {
-      console.warn(`[PDOK] fail pc=${pc} nr=${houseNumber} err=HTTP ${res.status}`);
-      return result;
-    }
+    if (!res.ok) return result;
 
     const data = await res.json();
     const docs: Array<Record<string, string>> = data?.response?.docs ?? [];
 
-    if (docs.length === 0) {
-      console.warn(`[PDOK] fail pc=${pc} nr=${houseNumber} err=no docs returned`);
-      return result;
-    }
+    if (docs.length === 0) return result;
 
     const doc = docs[0];
     result.city = doc.woonplaatsnaam ?? null;
@@ -48,12 +42,8 @@ async function lookupPdok(
     result.street = doc.straatnaam ?? null;
     result.adresseerbaarobjectId = doc.adresseerbaarobject_id ?? null;
 
-    console.log(
-      `[PDOK] ok pc=${pc} nr=${houseNumber} city=${result.city} municipality=${result.municipality} vbo_id=${result.adresseerbaarobjectId}`
-    );
-  } catch (err) {
-    const pc = postcode.replace(/\s/g, "").toUpperCase();
-    console.warn(`[PDOK] fail pc=${pc} nr=${houseNumber} err=${err instanceof Error ? err.message : err}`);
+  } catch {
+    // PDOK lookup failed — non-blocking, continue with insert
   }
 
   return result;
@@ -74,9 +64,7 @@ interface BagData {
 }
 
 async function lookupBag(
-  adresseerbaarobjectId: string | null,
-  postcode: string,
-  houseNumber: number
+  adresseerbaarobjectId: string | null
 ): Promise<BagData> {
   const result: BagData = {
     bag_verblijfsobject_id: null,
@@ -85,30 +73,20 @@ async function lookupBag(
     surface_m2: null,
     usage_goal: null,
   };
-  const pc = postcode.replace(/\s/g, "").toUpperCase();
 
-  if (!adresseerbaarobjectId) {
-    console.warn(`[BAG] skip pc=${pc} nr=${houseNumber} err=no adresseerbaarobject_id from PDOK`);
-    return result;
-  }
+  if (!adresseerbaarobjectId) return result;
 
   try {
     // Step 1: verblijfsobject by identificatie
     const vboUrl = `${BAG_BASE}/collections/verblijfsobject/items?f=json&limit=1&identificatie=${adresseerbaarobjectId}`;
     const vboRes = await fetch(vboUrl, { signal: AbortSignal.timeout(4000) });
 
-    if (!vboRes.ok) {
-      console.warn(`[BAG] fail pc=${pc} nr=${houseNumber} err=vbo HTTP ${vboRes.status}`);
-      return result;
-    }
+    if (!vboRes.ok) return result;
 
     const vboData = await vboRes.json();
     const vboFeatures = vboData?.features ?? [];
 
-    if (vboFeatures.length === 0) {
-      console.warn(`[BAG] fail pc=${pc} nr=${houseNumber} err=no verblijfsobject found for id=${adresseerbaarobjectId}`);
-      return result;
-    }
+    if (vboFeatures.length === 0) return result;
 
     const vbo = vboFeatures[0].properties;
     result.bag_verblijfsobject_id = vbo.identificatie ?? adresseerbaarobjectId;
@@ -126,16 +104,11 @@ async function lookupBag(
         const pand = pandData?.properties ?? pandData;
         result.bag_pand_id = pand.identificatie ?? null;
         result.build_year = typeof pand.bouwjaar === "number" ? pand.bouwjaar : null;
-      } else {
-        console.warn(`[BAG] fail pc=${pc} nr=${houseNumber} err=pand HTTP ${pandRes.status}`);
       }
     }
 
-    console.log(
-      `[BAG] ok pc=${pc} nr=${houseNumber} m2=${result.surface_m2} build_year=${result.build_year} usage=${result.usage_goal}`
-    );
-  } catch (err) {
-    console.warn(`[BAG] fail pc=${pc} nr=${houseNumber} err=${err instanceof Error ? err.message : err}`);
+  } catch {
+    // BAG lookup failed — non-blocking, continue with insert
   }
 
   return result;
@@ -189,7 +162,7 @@ export async function POST(request: NextRequest) {
     const pdok = await lookupPdok(body.postcode, houseNumber);
 
     // BAG building enrichment (best-effort, uses adresseerbaarobject_id from PDOK)
-    const bag = await lookupBag(pdok.adresseerbaarobjectId, body.postcode, houseNumber);
+    const bag = await lookupBag(pdok.adresseerbaarobjectId);
 
     // Explicit field mapping — never blind-insert the body
     const row = {
