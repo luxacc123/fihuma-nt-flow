@@ -146,14 +146,6 @@ async function lookupBag(
 // ---------------------------------------------------------------------------
 
 export async function POST(request: NextRequest) {
-  // Temporary debug: log env-var presence (no secrets)
-  console.log("[api/lead] env check:", {
-    hasSupabaseUrl: !!process.env.SUPABASE_URL,
-    hasNextPublicUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-    hasAnonKey: !!process.env.SUPABASE_ANON_KEY,
-    hasNextPublicKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  });
-
   try {
     const body = await request.json();
 
